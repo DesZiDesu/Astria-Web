@@ -108,6 +108,7 @@ body.intro-pending .site-shell{display:none}
   box-shadow:0 0 0 7px color-mix(in srgb,currentColor 10%,transparent),0 0 20px currentColor;
   animation:statusLive 1.8s ease-in-out infinite
 }
+.archive-status .live-dot{animation:none}
 .status-copy em{
   margin-top:17px;color:rgba(255,255,255,.34);font:500 .46rem/1.4 Cinzel,serif;
   letter-spacing:.15em;white-space:nowrap
