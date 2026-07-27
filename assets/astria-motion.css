@@ -73,48 +73,54 @@ body.intro-pending .site-shell{display:none}
 
 /* Live archive and community status */
 .status-console{
-  position:relative;display:grid;grid-template-columns:minmax(360px,1.08fr) minmax(420px,.92fr);
-  min-height:210px;margin-top:36px;overflow:hidden;color:#f4f6f4;
+  position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  min-height:224px;margin-top:36px;overflow:hidden;color:#f4f6f4;
   border:1px solid rgba(255,255,255,.11);
-  background:linear-gradient(118deg,#0c1110,#0b0d11 58%,#111216);
+  background:linear-gradient(118deg,#0c1110,#0b0d11 48%,#111216);
   box-shadow:0 22px 55px rgba(0,0,0,.25)
 }
 .status-console::before{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;
   background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
-  background-size:32px 32px;mask-image:linear-gradient(90deg,#000,transparent 72%)
+  background-size:32px 32px;mask-image:linear-gradient(90deg,#000,transparent 86%)
 }
-.archive-live{position:relative;min-height:210px;display:flex;align-items:center;padding:36px 8%;overflow:hidden;border-right:1px solid rgba(255,255,255,.1)}
-.status-radar{position:absolute;right:-2%;top:50%;width:min(56%,330px);height:auto;transform:translateY(-50%);overflow:visible;opacity:.72}
-.radar-ring,.radar-axis{fill:none;stroke:rgba(98,245,165,.22);stroke-width:1}
-.radar-ring-a{stroke-dasharray:7 10;transform-origin:160px 100px;animation:radarSpin 20s linear infinite}
-.radar-ring-b{stroke:rgba(98,245,165,.34);stroke-dasharray:2 7;transform-origin:160px 100px;animation:radarSpin 13s linear infinite reverse}
-.radar-ring-c{stroke:rgba(98,245,165,.5);animation:radarBreath 3s ease-in-out infinite}
-.radar-axis{stroke:rgba(98,245,165,.1);stroke-dasharray:3 8}
-.radar-sweep{transform-origin:160px 100px;animation:radarSpin 5s linear infinite}
-.radar-ping{fill:#62f5a5;filter:drop-shadow(0 0 7px #62f5a5);animation:radarPing 2.2s ease-out infinite}
-.ping-b{animation-delay:1.1s}
-.archive-live-copy{position:relative;z-index:2;display:grid}
-.archive-live-copy small{color:rgba(255,255,255,.46);font:500 .62rem/1 Cinzel,serif;letter-spacing:.25em}
-.archive-live-copy strong{display:flex;align-items:center;gap:14px;margin-top:14px;color:#62f5a5;font:500 clamp(2.4rem,5vw,4.8rem)/.9 Cinzel,serif;letter-spacing:.04em;text-shadow:0 0 28px rgba(98,245,165,.18)}
-.archive-live-copy strong i{width:12px;height:12px;border-radius:50%;background:#62f5a5;box-shadow:0 0 0 7px rgba(98,245,165,.09),0 0 20px rgba(98,245,165,.8);animation:statusLive 1.8s ease-in-out infinite}
-.archive-live-copy>span{margin-top:15px;color:rgba(255,255,255,.38);font:500 .5rem/1 Cinzel,serif;letter-spacing:.18em}
-.service-statuses{position:relative;z-index:2;display:grid;grid-template-rows:repeat(2,1fr)}
-.service-status{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:19px;padding:24px 7%;border-bottom:1px solid rgba(255,255,255,.09)}
-.service-status:last-child{border-bottom:0}
-.service-status small{display:block;margin-bottom:9px;color:rgba(255,255,255,.34);font:500 .5rem/1 Cinzel,serif;letter-spacing:.2em}
-.service-status strong{display:block;color:rgba(255,255,255,.72);font-size:.84rem;font-weight:500;line-height:1.55}
-.service-status strong span{font-weight:700}
-.service-status.is-online strong span{color:#62f5a5}
-.service-status.is-closed strong span{color:#ff6677}
-.service-glyph{position:relative;width:54px;aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(98,245,165,.25);border-radius:50%;background:rgba(98,245,165,.035)}
-.service-glyph::before,.service-glyph::after{content:"";position:absolute;border:1px solid rgba(98,245,165,.18);border-radius:50%;animation:serviceOrbit 5.5s linear infinite}
-.service-glyph::before{inset:7px;border-style:dashed}.service-glyph::after{inset:16px;animation-direction:reverse;animation-duration:3.5s}
-.service-glyph i{position:absolute;width:5px;height:5px;border-radius:50%;background:#62f5a5;box-shadow:0 0 8px rgba(98,245,165,.85)}
-.service-glyph i:nth-child(1){left:7px;top:23px}.service-glyph i:nth-child(2){right:11px;top:10px}.service-glyph i:nth-child(3){right:9px;bottom:10px}
-.form-glyph{border-radius:3px;border-color:rgba(255,102,119,.28);background:rgba(255,102,119,.035)}
-.form-glyph::before,.form-glyph::after{border-radius:2px;border-color:rgba(255,102,119,.2)}
-.form-glyph i{border-radius:1px;background:#ff6677;box-shadow:0 0 8px rgba(255,102,119,.7)}
+.status-tile{
+  position:relative;min-width:0;min-height:224px;display:flex;align-items:center;
+  padding:38px clamp(25px,3vw,48px);overflow:hidden;border-right:1px solid rgba(255,255,255,.1)
+}
+.status-tile:last-child{border-right:0}
+.status-tile::after{
+  content:"";position:absolute;inset:auto -18% -72% 12%;height:130%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.045),transparent 65%);pointer-events:none
+}
+.status-copy{position:relative;z-index:2;display:grid;min-width:0}
+.status-copy small{color:rgba(255,255,255,.42);font:500 .57rem/1.3 Cinzel,serif;letter-spacing:.22em}
+.status-copy strong{
+  display:flex;align-items:center;gap:13px;margin-top:15px;
+  font:600 clamp(1.55rem,2.4vw,2.85rem)/1 "Noto Sans Thai",Cinzel,sans-serif;
+  letter-spacing:.035em;text-shadow:0 0 28px currentColor
+}
+.status-copy strong span{white-space:nowrap}
+.status-tile.is-online .status-copy strong{color:#62f5a5}
+.status-tile.is-closed .status-copy strong{color:#ff6677}
+.live-dot{
+  flex:0 0 auto;width:12px;height:12px;border-radius:50%;background:currentColor;
+  box-shadow:0 0 0 7px color-mix(in srgb,currentColor 10%,transparent),0 0 20px currentColor;
+  animation:statusLive 1.8s ease-in-out infinite
+}
+.status-copy em{
+  margin-top:17px;color:rgba(255,255,255,.34);font:500 .46rem/1.4 Cinzel,serif;
+  letter-spacing:.15em;white-space:nowrap
+}
+.signal-lattice{position:absolute;inset:auto -8% 3% auto;width:96%;height:76%;opacity:.74;overflow:visible}
+.signal-grid path{fill:none;stroke:rgba(98,245,165,.08);stroke-width:1}
+.signal-ghost{fill:none;stroke:rgba(98,245,165,.16);stroke-width:9;filter:blur(8px)}
+.signal-trace{
+  fill:none;stroke:url(#archiveSignal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:92 42;animation:signalFlow 4.6s linear infinite
+}
+.signal-node{fill:#62f5a5;filter:drop-shadow(0 0 7px #62f5a5);animation:signalNode 2.3s ease-in-out infinite}
+.node-b{animation-delay:.75s}.node-c{animation-delay:1.5s}
 
 /* House crests */
 .college-tabs button{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;overflow:hidden}
@@ -147,7 +153,7 @@ body.intro-pending .site-shell{display:none}
 .house-crest{position:relative;z-index:1;width:90px;aspect-ratio:1;display:grid;place-items:center}
 .house-crest img{
   display:block;width:100%;height:100%;object-fit:contain;
-  filter:drop-shadow(0 8px 11px rgba(0,0,0,.3));animation:crestBreathe 4.8s ease-in-out infinite
+  filter:drop-shadow(0 8px 11px rgba(0,0,0,.3));animation:none
 }
 .house-card>div:last-child{position:relative;z-index:1}
 
@@ -227,16 +233,15 @@ body.intro-pending .site-shell{display:none}
 @keyframes continentDrift{50%{transform:translateY(-8px) rotate(.8deg);filter:drop-shadow(0 0 28px rgba(90,133,203,.25))}}
 @keyframes beaconPulse{70%{box-shadow:0 0 0 18px transparent,0 0 28px rgba(255,226,155,.5)}}
 @keyframes statusPulse{50%{opacity:.45;transform:scale(.78)}}
-@keyframes radarSpin{to{transform:rotate(360deg)}}
-@keyframes radarBreath{50%{opacity:.38;transform:scale(1.12);transform-origin:160px 100px}}
-@keyframes radarPing{70%{opacity:.25;transform:scale(2.4)}}
 @keyframes statusLive{50%{opacity:.5;transform:scale(.78)}}
-@keyframes serviceOrbit{to{transform:rotate(360deg)}}
+@keyframes signalFlow{to{stroke-dashoffset:-134}}
+@keyframes signalNode{50%{opacity:.35;transform:scale(1.75);transform-origin:center}}
 
 @media(max-width:950px){
   .world-map-module{grid-template-columns:1fr}.world-map-visual{min-height:480px}.world-map-copy{padding:42px}
   .house-card{grid-template-columns:76px 1fr}.house-crest{width:76px}
-  .status-console{grid-template-columns:1fr}.archive-live{border-right:0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .status-console{grid-template-columns:1fr}.status-tile{min-height:168px;border-right:0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .status-tile:last-child{border-bottom:0}.signal-lattice{width:min(620px,82%);height:92%}
 }
 @media(max-width:640px){
   .main-layout{display:block;min-height:0}.hero-copy{position:relative;z-index:2}
@@ -249,19 +254,17 @@ body.intro-pending .site-shell{display:none}
   .archive-node{position:relative;inset:auto!important;width:auto;min-height:88px;padding:14px}
   .archive-node b{font-size:.56rem;line-height:1.35}.archive-node span{font-size:.6rem;line-height:1.55}
   .archive-node:hover{transform:none}
-  .status-console{min-height:0;margin-top:24px}.archive-live{min-height:190px;padding:28px 24px}
-  .status-radar{right:-48px;width:260px}.archive-live-copy strong{font-size:2.55rem}
-  .service-status{grid-template-columns:52px 1fr;gap:15px;padding:21px 20px}.service-glyph{width:48px}
-  .service-status strong{font-size:.75rem}.service-status small{font-size:.45rem}
+  .status-console{min-height:0;margin-top:24px}.status-tile{min-height:150px;padding:27px 23px}
+  .status-copy strong{font-size:1.85rem}.status-copy small{font-size:.48rem}.status-copy em{font-size:.4rem}
+  .signal-lattice{right:-24%;width:112%;height:88%;opacity:.52}
   .college-tabs button{justify-content:flex-start}.college-tab-mark{width:36px;height:36px}
   .house-card{grid-template-columns:64px 1fr;padding:18px;gap:15px}.house-crest{width:64px}
   .world-map-visual{min-height:390px}.world-map-copy{padding:30px 23px}.world-map-copy h3{font-size:2.3rem}
 }
 @media(max-width:390px){
   .archive-map{grid-template-columns:1fr;padding-top:300px}.archive-orbit{top:145px;width:235px}
-  .archive-node{min-height:72px}.archive-live-copy strong{font-size:2.25rem}
-  .status-radar{right:-75px;opacity:.55}.service-status{padding-inline:16px}
+  .archive-node{min-height:72px}.status-copy strong{font-size:1.65rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .screen::before,.screen::after,.archive-orbit *,.status-console *,.college-art-image,.house-crest img,.world-map-visual *{animation:none!important}
+  .screen::before,.screen::after,.archive-orbit *,.status-console *,.college-art-image,.world-map-visual *{animation:none!important}
 }

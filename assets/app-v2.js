@@ -6,6 +6,11 @@
   const prose = arr => arr.map(p => `<p>${p}</p>`).join('');
   const collegeMark = name => name.replace('College of ', '').slice(0, 2).toUpperCase();
   const collegeImage = id => (window.ASTRIA_COLLEGE_IMAGES || {})[id] || '';
+  const pillarColor = college => {
+    const branch = {chalybis:'machina', phrenos:'vismentis'}[college?.id];
+    const branchColor = college?.subs?.find(sub => sub.name.toLowerCase() === branch)?.color;
+    return branchColor || college?.accent || 'var(--gold)';
+  };
   const openAllDetails = (root=document) => $$('details', root).forEach(detail => { detail.open = true; });
 
   function renderLucaria(){
@@ -24,7 +29,7 @@
           <div class="prose">
             <div class="relationship-grid">${L.lucaria.relationships.map(r=>{
               const id=r.name.toLowerCase(), college=L.colleges.find(c=>c.id===id);
-              return `<article class="relationship-card house-card" style="--house-color:${college?.accent||'var(--gold)'}">
+              return `<article class="relationship-card house-card" data-house="${id}" style="--house-color:${pillarColor(college)}">
                 <div class="house-crest"><img src="${collegeImage(id)}" alt="ตราประจำ ${r.name}"></div>
                 <div><h4>${r.name}</h4><p>${r.text}</p></div>
               </article>`;
