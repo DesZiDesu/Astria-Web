@@ -242,8 +242,8 @@
   .lineage-hero-copy{padding:28px 23px}.lineage-hero-copy h3{font-size:2rem}.lineage-hero-copy p{font-size:.85rem}
   .lineage-tally strong{font-size:2rem}.lineage-tally span{font-size:.62rem}.lineage-tally small{font-size:.43rem}
   .lineage-groups{grid-template-columns:1fr}.lineage-groups button{border-right:0;border-bottom:1px solid var(--soft)}.lineage-groups button:last-child{border-bottom:0}
-  .race-selector{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:11px;scrollbar-width:thin}
-  .race-selector button{flex:0 0 156px;grid-template-columns:40px minmax(0,1fr) 14px;min-height:70px;scroll-snap-align:start}
+  .race-selector{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;overflow:visible;padding-bottom:11px}
+  .race-selector button{width:100%;grid-template-columns:40px minmax(0,1fr) 14px;min-height:70px}
   .race-selector img{width:40px;height:40px}.race-selector strong{font-size:.63rem}.race-selector small{font-size:.54rem}
   .race-stage{min-height:0}.race-illustration{min-height:420px;padding:52px 24px 82px}
   .race-illustration::before{inset:15px}.race-emblem-frame{width:min(62%,245px)}
@@ -255,6 +255,7 @@
 }
 @media(max-width:400px){
   .lineage-tally div{padding:20px 9px}.lineage-groups button{padding-inline:14px}
+  .race-selector{grid-template-columns:1fr}
   .race-illustration{min-height:370px}.race-emblem-frame{width:min(68%,220px)}
   .race-record{padding-inline:19px}.race-record-top{display:block}.record-status{margin-top:11px}
 }
