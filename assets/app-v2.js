@@ -5,6 +5,8 @@
   const $$ = (s, root=document) => [...root.querySelectorAll(s)];
   const prose = arr => arr.map(p => `<p>${p}</p>`).join('');
   const collegeMark = name => name.replace('College of ', '').slice(0, 2).toUpperCase();
+  const collegeImage = id => (window.ASTRIA_COLLEGE_IMAGES || {})[id] || '';
+  const openAllDetails = (root=document) => $$('details', root).forEach(detail => { detail.open = true; });
 
   function renderLucaria(){
     const el = $('#lucariaContent');
@@ -20,20 +22,27 @@
         <details open>
           <summary><strong>THE FOUR PILLARS · ความสัมพันธ์ระหว่าง 4 College</strong></summary>
           <div class="prose">
-            <div class="relationship-grid">${L.lucaria.relationships.map(r=>`<article class="relationship-card"><h4>${r.name}</h4><p>${r.text}</p></article>`).join('')}</div>
+            <div class="relationship-grid">${L.lucaria.relationships.map(r=>{
+              const id=r.name.toLowerCase(), college=L.colleges.find(c=>c.id===id);
+              return `<article class="relationship-card house-card" style="--house-color:${college?.accent||'var(--gold)'}">
+                <div class="house-crest"><img src="${collegeImage(id)}" alt="ตราประจำ ${r.name}"></div>
+                <div><h4>${r.name}</h4><p>${r.text}</p></div>
+              </article>`;
+            }).join('')}</div>
             <p style="margin-top:24px">${L.lucaria.relationClosing}</p>
           </div>
         </details>
-        <details>
+        <details open>
           <summary><strong>ACADEMIA DOCTRINE · เจตจำนงของผู้พิทักษ์</strong></summary>
           <div class="prose"><p>Lucaria ไม่มองนักเรียนเป็นอาวุธไร้เจตจำนง ผู้พิทักษ์ต้องมีความฝัน ความกลัว ความรัก ความผิดพลาด และมีสิทธิ์เลือกเส้นทางของตนเอง แม้กำเนิดของมิติหน้าด่านจะผูกพันกับสงครามก็ตาม</p></div>
         </details>
       </div>`;
+    openAllDetails(el);
   }
 
   function renderColleges(){
     const el = $('#collegeContent');
-    el.innerHTML = `<div class="segmented-tabs" id="collegeTabs">${L.colleges.map((c,i)=>`<button class="${i===0?'active':''}" data-college="${c.id}"><span class="college-tab-mark">${collegeMark(c.name)}</span><span>${c.name}</span></button>`).join('')}</div><div class="college-stage" id="collegeStage"></div>`;
+    el.innerHTML = `<div class="segmented-tabs college-tabs" id="collegeTabs">${L.colleges.map((c,i)=>`<button class="${i===0?'active':''}" data-college="${c.id}" style="--college-color:${c.accent}"><span class="college-tab-mark">${collegeImage(c.id)?`<img src="${collegeImage(c.id)}" alt="">`:collegeMark(c.name)}</span><span>${c.name}</span></button>`).join('')}</div><div class="college-stage" id="collegeStage"></div>`;
     const draw = id => {
       const c = L.colleges.find(x=>x.id===id) || L.colleges[0];
       const source = (window.ASTRIA_COLLEGE_IMAGES || {})[c.id];
@@ -62,6 +71,7 @@
               <div class="color-chip" style="--sub-color:${s.color}"><i></i><span>${s.colorName} · <code>${s.color}</code><br>${s.colorText}</span></div>
             </article>`).join('')}</div>
         </div>`;
+      openAllDetails($('#collegeStage'));
     };
     draw(L.colleges[0].id);
     $('#collegeTabs').addEventListener('click',e=>{
@@ -159,22 +169,39 @@
   function renderWorld(){
     const el=$('#worldContent');
     el.innerHTML=`
-      <div class="segmented-tabs world-tabs" id="worldTabs"><button class="active" data-world="cities">CITIES</button><button data-world="calamities">CALAMITIES</button><button data-world="landmark">LANDMARK</button><button data-world="trial">PIONEER TRIAL</button></div>
-      <section class="world-group active" data-world-group="cities"><div class="city-grid">${L.world.cities.map((c,i)=>`<article class="city-card"><div class="mini-label">CITY · 0${i+1}</div><h4>${c.name}</h4><p><strong>${c.thai}</strong><br>${c.text}</p></article>`).join('')}</div></section>
+      <div class="segmented-tabs world-tabs" id="worldTabs"><button class="active" data-world="map">WORLD MAP</button><button data-world="cities">CITIES</button><button data-world="calamities">CALAMITIES</button><button data-world="landmark">LANDMARK</button><button data-world="trial">PIONEER TRIAL</button></div>
+      <section class="world-group active" data-world-group="map">
+        <article class="world-map-module">
+          <div class="world-map-visual" aria-label="Animated map placeholder">
+            <div class="map-orbit map-orbit-outer"><i></i><i></i><i></i></div>
+            <div class="map-orbit map-orbit-mid"><i></i><i></i></div>
+            <div class="map-orbit map-orbit-inner"><i></i></div>
+            <div class="map-continent continent-a"></div><div class="map-continent continent-b"></div><div class="map-continent continent-c"></div>
+            <div class="map-beacon beacon-a"><span>01</span></div><div class="map-beacon beacon-b"><span>02</span></div><div class="map-beacon beacon-c"><span>03</span></div>
+            <div class="map-core"><span>GAIA</span><small>FRONTIER DIMENSION</small></div>
+          </div>
+          <div class="world-map-copy">
+            <div class="mini-label">WORLD RECORD · CARTOGRAPHY 00</div>
+            <h3>ASTRIA WORLD MAP</h3>
+            <p>แผนที่โลกฉบับสมบูรณ์กำลังรอการบันทึกลงใน Archive ขณะนี้ระบบจะแสดงวงโคจรของมิติ จุดเชื่อมต่อ และสัญญาณชีพของ Gaia แทนตำแหน่งภูมิศาสตร์จริง</p>
+            <div class="map-status"><i></i><span><strong>CARTOGRAPHIC PLATE PENDING</strong><small>ANIMATED DIMENSIONAL PROJECTION ACTIVE</small></span></div>
+          </div>
+        </article>
+      </section>
+      <section class="world-group" data-world-group="cities"><div class="city-grid">${L.world.cities.map((c,i)=>`<article class="city-card"><div class="mini-label">CITY · 0${i+1}</div><h4>${c.name}</h4><p><strong>${c.thai}</strong><br>${c.text}</p></article>`).join('')}</div></section>
       <section class="world-group" data-world-group="calamities"><article class="archive-panel"><div class="mini-label">GAIA · FINAL WARNING</div><h3>ภัยพิบัติทั้งสิบ</h3><div class="prose"><p>${L.world.calamityIntro}</p></div><div class="calamity-list">${L.world.calamities.map(x=>`<div class="calamity">${x}</div>`).join('')}</div></article></section>
       <section class="world-group" data-world-group="landmark"><article class="world-feature"><div class="feature-visual"><div class="wave"></div></div><div class="feature-content"><div class="mini-label">LANDMARK · MIRRORED OCEAN</div><h3>${L.world.landmark.name}</h3><div class="prose"><p>${L.world.landmark.text}</p></div><blockquote class="lore-quote">“${L.world.landmark.quote}”</blockquote></div></article></section>
       <section class="world-group" data-world-group="trial"><article class="archive-panel"><div class="mini-label">LEGACY EVENT · SELECTED SOUL</div><h3>${L.world.trial.name}</h3><div class="founder-list">${L.world.trial.founders.map(x=>`<div class="founder">${x}</div>`).join('')}</div><div class="prose">${prose(L.world.trial.paragraphs)}</div></article></section>`;
     $('#worldTabs').addEventListener('click',e=>{const b=e.target.closest('[data-world]');if(!b)return;$$('#worldTabs button').forEach(x=>x.classList.toggle('active',x===b));$$('[data-world-group]').forEach(x=>x.classList.toggle('active',x.dataset.worldGroup===b.dataset.world));});
   }
 
-  function ruleItems(items){return items.map((r,i)=>`<details class="rule-item" ${i===0?'open':''}><summary><span class="rule-no">${String(i+1).padStart(2,'0')}</span><span class="rule-title"><strong>${r.title}</strong><small>${r.en}</small></span><span class="rule-caret">+</span></summary><div class="rule-body"><p>${r.body}</p></div></details>`).join('')}
+  function ruleItems(items){return items.map((r,i)=>`<details class="rule-item" open><summary><span class="rule-no">${String(i+1).padStart(2,'0')}</span><span class="rule-title"><strong>${r.title}</strong><small>${r.en}</small></span><span class="rule-caret">+</span></summary><div class="rule-body"><p>${r.body}</p></div></details>`).join('')}
   function renderRules(){
     $('#rulesContent').innerHTML=`
       <div class="rules-intro"><article class="rules-summary"><div class="mini-label">ASTRIA COMMUNITY DIRECTIVES</div><h3>กฎภายในคอมมูนิตี้</h3><p>แยกพื้นที่ผู้เล่นหลังจอ (OOC) ออกจากการกระทำของตัวละคร (IC) อย่างชัดเจน เพื่อให้เรื่องราวเข้มข้นได้โดยไม่ทำลายขอบเขต ความปลอดภัย และการให้เกียรติระหว่างผู้เล่น</p></article><aside class="rules-status"><div class="status-row"><small>OOC PUBLISHED</small><strong>${String(L.rules.ooc.length).padStart(2,'0')}</strong></div><div class="status-row"><small>IC ACTIVE</small><strong>${String(L.rules.ic.length).padStart(2,'0')}</strong></div><div class="status-row"><small>ENFORCEMENT</small><strong>ACTIVE</strong></div></aside></div>
-      <div class="rule-switch" id="ruleTabs"><button class="active" data-rule="ooc">OOC · นอกโรล</button><button data-rule="ic">IC · ในโรล</button></div>
-      <div class="rule-group active" data-rule-group="ooc"><div class="rule-group-head"><h3>OOC — Out of Character</h3><span class="rule-count">${String(L.rules.ooc.length).padStart(2,'0')} PUBLISHED RULES</span></div><p class="rule-note">ช่องพูดคุยทั่วไป ภาพ มีม และทุกช่องทางสื่อสารระหว่างผู้เล่นหลังจอ ข้อมูลในพื้นที่นี้ไม่ใช่ความรู้ของตัวละคร</p><div class="rules-list">${ruleItems(L.rules.ooc)}</div></div>
-      <div class="rule-group" data-rule-group="ic"><div class="rule-group-head"><h3>IC — In Character</h3><span class="rule-count">${String(L.rules.ic.length).padStart(2,'0')} ACTIVE RULES</span></div><p class="rule-note">ครอบคลุมการสวมบทบาท การดำเนินเนื้อเรื่อง การต่อสู้ และทุกการกระทำภายในโลก Astria</p><div class="rules-list">${ruleItems(L.rules.ic)}</div></div>`;
-    $('#ruleTabs').addEventListener('click',e=>{const b=e.target.closest('[data-rule]');if(!b)return;$$('#ruleTabs button').forEach(x=>x.classList.toggle('active',x===b));$$('[data-rule-group]').forEach(x=>x.classList.toggle('active',x.dataset.ruleGroup===b.dataset.rule));});
+      <div class="rule-group active expanded-rule-group" data-rule-group="ooc"><div class="rule-group-head"><h3>OOC — Out of Character</h3><span class="rule-count">${String(L.rules.ooc.length).padStart(2,'0')} PUBLISHED RULES</span></div><p class="rule-note">ช่องพูดคุยทั่วไป ภาพ มีม และทุกช่องทางสื่อสารระหว่างผู้เล่นหลังจอ ข้อมูลในพื้นที่นี้ไม่ใช่ความรู้ของตัวละคร</p><div class="rules-list">${ruleItems(L.rules.ooc)}</div></div>
+      <div class="rule-group active expanded-rule-group" data-rule-group="ic"><div class="rule-group-head"><h3>IC — In Character</h3><span class="rule-count">${String(L.rules.ic.length).padStart(2,'0')} ACTIVE RULES</span></div><p class="rule-note">ครอบคลุมการสวมบทบาท การดำเนินเนื้อเรื่อง การต่อสู้ และทุกการกระทำภายในโลก Astria</p><div class="rules-list">${ruleItems(L.rules.ic)}</div></div>`;
+    openAllDetails($('#rulesContent'));
   }
 
   function setupNavigation(){
@@ -207,10 +234,11 @@
     const box=$('#legendText');box.replaceChildren();splitGraphemes(L.intro).forEach(u=>{const s=document.createElement('span');s.className='story-unit';if(u==='\n'){s.classList.add('break');s.setAttribute('aria-hidden','true')}else if(/^\s+$/u.test(u)){s.classList.add('space');s.textContent=u}else s.textContent=u;box.appendChild(s)});
   }
   function runIntro(){
-    clearTimers();finished=false;const stage=$('#introStage'),page=$('#pageShell'),site=$('#siteShell');stage.style.display='block';stage.scrollTop=0;stage.classList.remove('is-leaving');site.classList.remove('is-visible');page.classList.remove('is-closing');$('#readingStatus').classList.remove('show');$('#countdown').textContent='5';buildLegend();
+    clearTimers();finished=false;const stage=$('#introStage'),page=$('#pageShell'),site=$('#siteShell');document.body.classList.add('intro-pending');site.classList.remove('site-entering');stage.style.display='block';stage.scrollTop=0;stage.classList.remove('is-leaving');site.classList.remove('is-visible');page.classList.remove('is-closing');$('#readingStatus').classList.remove('show');$('#countdown').textContent='5';buildLegend();
     const units=$$('#legendText .story-unit');let i=0;const compact=matchMedia('(max-width:780px)').matches;later(function next(){if(finished)return;if(i>=units.length){$('#readingStatus').classList.add('show');let n=5;later(function tick(){n--;$('#countdown').textContent=Math.max(n,0);if(n<=0)finishIntro();else later(tick,1000)},1000);return}const u=units[i++];u.classList.add('is-writing');later(()=>u.classList.add('is-settled'),430);later(next,u.classList.contains('break')?75:(compact?48:44))},compact?650:920);
   }
-  function finishIntro(immediate=false){if(finished)return;finished=true;clearTimers();const stage=$('#introStage'),page=$('#pageShell'),site=$('#siteShell');if(immediate){stage.classList.add('is-leaving');site.classList.add('is-visible');return}page.classList.add('is-closing');later(()=>{stage.classList.add('is-leaving');site.classList.add('is-visible')},980)}
+  function revealSite(stage,site){document.body.classList.remove('intro-pending');site.classList.add('is-visible','site-entering');stage.classList.add('is-leaving')}
+  function finishIntro(immediate=false){if(finished)return;finished=true;clearTimers();const stage=$('#introStage'),page=$('#pageShell'),site=$('#siteShell');if(immediate){revealSite(stage,site);return}page.classList.add('is-closing');later(()=>revealSite(stage,site),980)}
   function setupIntro(){ $('#skipIntro').addEventListener('click',()=>finishIntro(true)); addEventListener('orientationchange',()=>{const s=$('#introStage');if(!s.classList.contains('is-leaving'))setTimeout(()=>s.scrollTo({top:0}),120)});runIntro(); }
   function setupTheme(){const q=matchMedia('(prefers-color-scheme:dark)'),meta=$('#themeColor');const sync=()=>meta.setAttribute('content',q.matches?'#101114':'#ebe9e4');sync();q.addEventListener?.('change',sync)}
   function setupMisc(){const toast=$('#toast');$('#discordButton').addEventListener('click',()=>{toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)})}
