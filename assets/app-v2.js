@@ -142,13 +142,15 @@
 
     const drawSelector=group=>{
       const races=L.races.filter(r=>r.group===group);
-      $('#raceTabs').innerHTML=races.map((r,i)=>`
+      const tabs=$('#raceTabs');
+      tabs.innerHTML=races.map((r,i)=>`
         <button class="${i===0?'active':''}" type="button" role="tab" aria-selected="${i===0}" data-race="${r.id}" style="--race-accent:${r.accent}">
           <span class="race-tab-number">${r.ordinal}</span>
           <img src="${r.image}" alt="" loading="lazy">
           <span class="race-tab-copy"><strong>${r.name}</strong><small>${r.thai}</small></span>
           <span class="race-tab-arrow" aria-hidden="true">↗</span>
         </button>`).join('');
+      tabs.scrollLeft=0;
       $('#lineageReadout').textContent=`${group==='bloodline'?'BLOODLINES':'PEOPLES'} · ${String(races.length).padStart(2,'0')}`;
       draw(races[0].id);
     };
