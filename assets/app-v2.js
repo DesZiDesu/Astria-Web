@@ -69,29 +69,88 @@
 
   function renderRaces(){
     const el=$('#raceContent');
-    const groupName = g => g === 'common' ? 'COMMON LINEAGE' : 'DEMON-BLOODED';
+    const groupName=g=>g==='bloodline'?'THE SEVEN BLOODLINES':'THE FOUR PEOPLES';
+    const groupThai=g=>g==='bloodline'?'เจ็ดสายโลหิต':'สี่เผ่าพันธุ์หลัก';
     el.innerHTML=`
-      <div class="race-intro">
-        <article class="archive-panel"><div class="mini-label">ASTRIA LINEAGE ARCHIVE · VOLUME I</div><h3>11 สายเลือดแห่ง Astria</h3><p class="lead">รวม 4 สายเลือดสามัญที่พบได้ทั่วมิติหน้าด่าน และ 7 สายเลือดโลหิตจาก Vaethmoor พร้อมรูปลักษณ์ ประวัติถิ่นกำเนิด และพรสืบสายเลือดของแต่ละเผ่าพันธุ์</p></article>
-        <aside class="archive-panel"><div class="mini-label">ARCHIVE COMPOSITION</div><div class="lineage-counts"><div><strong>04</strong><span>COMMON</span></div><div><strong>07</strong><span>DEMON-BLOODED</span></div><div><strong>11</strong><span>TOTAL</span></div></div><p class="prose">เจ็ดสายเลือดโลหิตอ้างอิงจาก Codex of the Kin ใน Repository Web_Editor ส่วนสี่สายเลือดสามัญถูกเพิ่มเป็นฐานประชากรของโลก Astria</p></aside>
+      <div class="lineage-hero">
+        <div class="lineage-hero-copy">
+          <div class="mini-label">ASTRIA LINEAGE CODEX · VOLUME I</div>
+          <h3>ปกรณัมแห่งสายเลือด</h3>
+          <p>ก่อนประวัติศาสตร์จะถูกจารึก สายโลหิตหายากทั้งเจ็ดได้แตกหน่อขึ้นเคียงข้างสี่เผ่าพันธุ์หลัก บันทึกนี้รวบรวมรูปลักษณ์ ถิ่นอาศัย ตำนาน และพลังที่ไหลเวียนอยู่ในตัวพวกเขา</p>
+        </div>
+        <div class="lineage-tally" aria-label="จำนวนเผ่าพันธุ์ในคลัง">
+          <div><strong>07</strong><span>สายโลหิต</span><small>BLOODLINES</small></div>
+          <div><strong>04</strong><span>เผ่าพันธุ์หลัก</span><small>PEOPLES</small></div>
+          <div><strong>11</strong><span>บันทึกทั้งหมด</span><small>RECORDS</small></div>
+        </div>
       </div>
-      <div class="race-selector" id="raceTabs">${L.races.map((r,i)=>`<button class="${i===0?'active':''}" data-race="${r.id}"><img src="${r.image}" alt="" loading="lazy"><span class="race-tab-copy"><strong>${r.name}</strong><small>${r.thai} · ${groupName(r.group)}</small></span></button>`).join('')}</div>
-      <div id="raceStage"></div>`;
+      <div class="lineage-toolbar">
+        <div class="lineage-groups" id="lineageGroups" role="tablist" aria-label="เลือกหมวดสายเลือด">
+          <button class="active" type="button" role="tab" aria-selected="true" data-race-group="bloodline"><span>01</span><strong>THE SEVEN BLOODLINES</strong><small>เจ็ดสายโลหิต</small></button>
+          <button type="button" role="tab" aria-selected="false" data-race-group="common"><span>02</span><strong>THE FOUR PEOPLES</strong><small>สี่เผ่าพันธุ์หลัก</small></button>
+        </div>
+        <div class="lineage-readout"><span>ACTIVE ARCHIVE</span><strong id="lineageReadout">BLOODLINES · 07</strong></div>
+      </div>
+      <div class="race-selector" id="raceTabs" role="tablist" aria-label="เลือกเผ่าพันธุ์"></div>
+      <div id="raceStage" aria-live="polite"></div>`;
+
     const draw=id=>{
       const r=L.races.find(x=>x.id===id)||L.races[0];
+      const ability=r.ability?`
+        <section class="race-ability">
+          <div class="ability-head"><span>${r.ability.label}</span><i aria-hidden="true"></i></div>
+          <h4>${r.ability.name}</h4>
+          <p>${r.ability.text}</p>
+        </section>`:'';
       $('#raceStage').innerHTML=`
         <article class="race-stage" style="--race-accent:${r.accent}">
-          <div class="race-illustration"><img class="race-portrait" src="${r.image}" alt="ภาพสายเลือด ${r.name}"><div class="sigil-caption">${groupName(r.group)} PORTRAIT · ${r.name.toUpperCase()}</div></div>
+          <div class="race-illustration">
+            <div class="race-ordinal" aria-hidden="true">${r.ordinal}</div>
+            <div class="race-orbit orbit-one" aria-hidden="true"></div><div class="race-orbit orbit-two" aria-hidden="true"></div>
+            <div class="race-emblem-frame"><img class="race-portrait" src="${r.image}" alt="ตราประจำเผ่า ${r.name}"></div>
+            <div class="sigil-caption"><span>${groupName(r.group)}</span><strong>${r.name}</strong></div>
+          </div>
           <div class="race-record">
-            <div class="race-index">${r.index}</div><h3>${r.name}</h3><div class="race-thai">${r.thai}</div><div class="race-epithet">${r.epithet}</div>
-            <div class="prose" style="margin-top:25px"><p><strong>${r.lead}</strong></p><p>${r.lore}</p></div>
-            <div class="race-gift"><small>RACIAL GIFT</small><strong>${r.gift.name} · ${r.gift.thai}</strong><div class="prose"><p>${r.gift.text}</p></div></div>
-            <div class="trait-grid"><div class="trait-box"><small>BEARING</small><span>${r.traits.bearing}</span></div><div class="trait-box"><small>HOMELAND</small><span>${r.traits.homeland}</span></div><div class="trait-box"><small>TEMPER</small><span>${r.traits.temper}</span></div></div>
+            <div class="race-record-top"><div class="race-index">${r.index}</div><div class="record-status"><i></i> VERIFIED RECORD</div></div>
+            <h3>${r.name}</h3>
+            <div class="race-thai">${r.thai}</div>
+            <div class="race-epithet"><span>${r.epithetTh}</span><small>${r.epithet}</small></div>
+            ${r.gimmick?`<div class="race-gimmick">${r.gimmick}</div>`:''}
+            <div class="race-lore"><p>${r.lore}</p></div>
+            <div class="trait-grid">
+              <div class="trait-box"><small>ถิ่นอาศัย · HOMELAND</small><span>${r.homeland}</span></div>
+              <div class="trait-box"><small>ลักษณะเด่น · BEARING</small><span>${r.bearing}</span></div>
+            </div>
+            ${ability}
+            <div class="race-folio"><span>ASTRIA · LINEAGE ARCHIVE</span><span>${groupThai(r.group)} · ${r.ordinal}</span></div>
           </div>
         </article>`;
     };
-    draw(L.races[0].id);
-    $('#raceTabs').addEventListener('click',e=>{const b=e.target.closest('[data-race]');if(!b)return;$$('#raceTabs button').forEach(x=>x.classList.toggle('active',x===b));draw(b.dataset.race);});
+
+    const drawSelector=group=>{
+      const races=L.races.filter(r=>r.group===group);
+      $('#raceTabs').innerHTML=races.map((r,i)=>`
+        <button class="${i===0?'active':''}" type="button" role="tab" aria-selected="${i===0}" data-race="${r.id}" style="--race-accent:${r.accent}">
+          <span class="race-tab-number">${r.ordinal}</span>
+          <img src="${r.image}" alt="" loading="lazy">
+          <span class="race-tab-copy"><strong>${r.name}</strong><small>${r.thai}</small></span>
+          <span class="race-tab-arrow" aria-hidden="true">↗</span>
+        </button>`).join('');
+      $('#lineageReadout').textContent=`${group==='bloodline'?'BLOODLINES':'PEOPLES'} · ${String(races.length).padStart(2,'0')}`;
+      draw(races[0].id);
+    };
+
+    drawSelector('bloodline');
+    $('#lineageGroups').addEventListener('click',e=>{
+      const b=e.target.closest('[data-race-group]');if(!b)return;
+      $$('#lineageGroups button').forEach(x=>{const active=x===b;x.classList.toggle('active',active);x.setAttribute('aria-selected',String(active));});
+      drawSelector(b.dataset.raceGroup);
+    });
+    $('#raceTabs').addEventListener('click',e=>{
+      const b=e.target.closest('[data-race]');if(!b)return;
+      $$('#raceTabs button').forEach(x=>{const active=x===b;x.classList.toggle('active',active);x.setAttribute('aria-selected',String(active));});
+      draw(b.dataset.race);
+    });
   }
 
   function renderWorld(){
