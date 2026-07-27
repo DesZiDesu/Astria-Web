@@ -6,11 +6,12 @@
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#ebe9e4" id="themeColor">
   <title>Astria — Lucaria Archive</title>
-  <meta name="description" content="Astria and Lucaria Academia world archive, colleges, bloodlines, locations, calamities and community rules.">
+  <meta name="description" content="Astria and Lucaria Academia world archive, colleges, lineages, locations, calamities and community rules.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/race-images.css">
 </head>
 <body>
   <section class="intro-stage" id="introStage" aria-label="Astria opening chronicle">
@@ -50,7 +51,7 @@
         <button class="nav-button" data-view="invite">INVITE</button>
       </nav>
       <div class="user-panel"><span>SYSTEM THEME</span><span class="status-dot"></span></div>
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu" aria-expanded="false">MENU</button>
     </header>
 
     <div class="screen">
@@ -60,7 +61,7 @@
           <div class="hero-copy">
             <div class="eyebrow">World Archive / Frontier Dimension</div>
             <h1 class="display-title">THE<br><span>LUCARIA</span><br>ARCHIVE</h1>
-            <p class="lead">บันทึกของมิติหน้าด่านที่ Gaia สร้างขึ้นเพื่อปกป้องโลกแท้จริงจาก Astria — สถาบันผู้พิทักษ์ สี่ College เจ็ดสายเลือดโลหิต มหานคร ภัยพิบัติ และกฎของผู้ที่เลือกก้าวเข้ามาในเรื่องราวนี้</p>
+            <p class="lead">บันทึกของมิติหน้าด่านที่ Gaia สร้างขึ้นเพื่อปกป้องโลกแท้จริงจาก Astria — สถาบันผู้พิทักษ์ สี่ College สิบเอ็ดสายเลือด มหานคร ภัยพิบัติ และกฎของผู้ที่เลือกก้าวเข้ามาในเรื่องราวนี้</p>
             <div class="hero-actions">
               <button class="angular-button" data-jump="lucaria">OPEN ARCHIVE</button>
               <button class="angular-button light" data-replay>REPLAY INTRO</button>
@@ -68,7 +69,7 @@
           </div>
           <div class="archive-map" aria-label="Archive sections">
             <button class="archive-node n1" data-jump="colleges"><b>01 · FOUR PILLARS</b><span>สี่ College แห่ง Lucaria</span></button>
-            <button class="archive-node n2" data-jump="races"><b>02 · BLOODLINES</b><span>เจ็ดสายเลือดโลหิต</span></button>
+            <button class="archive-node n2" data-jump="races"><b>02 · LINEAGES</b><span>4 สายเลือดสามัญ และ 7 สายเลือดโลหิต</span></button>
             <button class="archive-node n3" data-jump="world"><b>03 · WORLD RECORD</b><span>เมือง ภัยพิบัติ และแลนด์มาร์ก</span></button>
             <button class="archive-node n4" data-jump="rules"><b>04 · PROTOCOL</b><span>กฎ OOC และ IC</span></button>
             <div class="archive-core"><span></span></div>
@@ -77,7 +78,7 @@
         <div class="data-strip">
           <div class="data-cell"><small>ARCHIVE STATUS</small><strong>ONLINE</strong></div>
           <div class="data-cell"><small>COLLEGES</small><strong>04</strong></div>
-          <div class="data-cell"><small>BLOODLINES</small><strong>07</strong></div>
+          <div class="data-cell"><small>LINEAGES</small><strong>11</strong></div>
           <div class="data-cell"><small>CALAMITIES</small><strong>10</strong></div>
         </div>
       </section>
@@ -93,7 +94,7 @@
       </section>
 
       <section class="view" data-view-panel="races">
-        <div class="section-header"><div><div class="eyebrow">Blood Archive / Seven Kindreds</div><h2 class="section-title">RACES</h2></div><div class="section-index">04</div></div>
+        <div class="section-header"><div><div class="eyebrow">Lineage Archive / Eleven Peoples</div><h2 class="section-title">RACES</h2></div><div class="section-index">04</div></div>
         <div id="raceContent"></div>
       </section>
 
@@ -123,8 +124,8 @@
   <div class="toast" id="toast" role="status">ยังไม่ได้กำหนด Discord Invite URL ใน Demo</div>
   <script src="assets/lore-base.js"></script>
   <script src="assets/lore-colleges.js"></script>
-  <script src="assets/lore-races.js"></script>
+  <script src="assets/lore-races-v2.js"></script>
   <script src="assets/lore-world.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/app-v2.js"></script>
 </body>
 </html>
