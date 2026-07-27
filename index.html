@@ -82,11 +82,46 @@
             </div>
           </div>
         </div>
-        <div class="data-strip">
-          <div class="data-cell"><small>ARCHIVE STATUS</small><strong>ONLINE</strong></div>
-          <div class="data-cell"><small>COLLEGES</small><strong>04</strong></div>
-          <div class="data-cell"><small>LINEAGES</small><strong>11</strong></div>
-          <div class="data-cell"><small>CALAMITIES</small><strong>10</strong></div>
+        <div class="status-console">
+          <div class="archive-live">
+            <svg class="status-radar" viewBox="0 0 320 200" aria-hidden="true">
+              <defs>
+                <linearGradient id="archiveSignal" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#62f5a5" stop-opacity="0"/>
+                  <stop offset=".5" stop-color="#62f5a5" stop-opacity=".72"/>
+                  <stop offset="1" stop-color="#62f5a5" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <circle class="radar-ring radar-ring-a" cx="160" cy="100" r="72"/>
+              <circle class="radar-ring radar-ring-b" cx="160" cy="100" r="49"/>
+              <circle class="radar-ring radar-ring-c" cx="160" cy="100" r="25"/>
+              <path class="radar-axis" d="M30 100H290M160 4V196"/>
+              <path class="radar-sweep" d="M160 100L271 48A123 123 0 0 1 282 100Z" fill="url(#archiveSignal)"/>
+              <circle class="radar-ping ping-a" cx="218" cy="67" r="4"/>
+              <circle class="radar-ping ping-b" cx="119" cy="132" r="3"/>
+            </svg>
+            <div class="archive-live-copy">
+              <small>ARCHIVE STATUS</small>
+              <strong><i></i>ONLINE</strong>
+              <span>DIMENSIONAL LINK · STABLE</span>
+            </div>
+          </div>
+          <div class="service-statuses">
+            <div class="service-status is-online">
+              <span class="service-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div>
+                <small>COMMUNITY GATEWAY</small>
+                <strong>Discord Status: <span>ออนไลน์</span></strong>
+              </div>
+            </div>
+            <div class="service-status is-closed">
+              <span class="service-glyph form-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div>
+                <small>CHARACTER INTAKE</small>
+                <strong>Form Registration Status: <span>ปิดรับ</span></strong>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
