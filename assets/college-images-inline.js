@@ -1,7 +1,7 @@
 window.ASTRIA_COLLEGE_IMAGES = {
-  phrenos: 'assets/college-crests/phrenos.png',
-  aethelum: 'assets/college-crests/aethelum.jpeg',
-  valcorax: 'assets/college-crests/valcorax.jpeg',
-  chalybis: 'assets/college-crests/chalybis.jpeg',
-  lucaria: 'assets/college-crests/lucaria-academia.jpeg'
+  lucaria: 'Gallery/lucaria_academia.jpeg',
+  phrenos: 'Gallery/Phrenos_College.png',
+  aethelum: 'Gallery/Aethelum_College.jpeg',
+  valcorax: 'Gallery/Valcorax_College.jpeg',
+  chalybis: 'Gallery/Chalybis_College.jpeg'
 };
