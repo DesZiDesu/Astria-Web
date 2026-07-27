@@ -36,10 +36,13 @@
     el.innerHTML = `<div class="segmented-tabs" id="collegeTabs">${L.colleges.map((c,i)=>`<button class="${i===0?'active':''}" data-college="${c.id}"><span class="college-tab-mark">${collegeMark(c.name)}</span><span>${c.name}</span></button>`).join('')}</div><div class="college-stage" id="collegeStage"></div>`;
     const draw = id => {
       const c = L.colleges.find(x=>x.id===id) || L.colleges[0];
+      const source = (window.ASTRIA_COLLEGE_IMAGES || {})[c.id];
       $('#collegeStage').innerHTML = `
         <article class="college-hero" style="--accent:${c.accent}">
           <div class="college-art">
-            <div class="college-art-placeholder"><span class="college-monogram">${collegeMark(c.name)}</span><small>COLLEGE ARTWORK · RESERVED</small></div>
+            ${source
+              ? `<img class="college-art-image" src="${source}" alt="ตราประจำ ${c.name}">`
+              : `<div class="college-art-placeholder"><span class="college-monogram">${collegeMark(c.name)}</span><small>COLLEGE ARTWORK · UNAVAILABLE</small></div>`}
           </div>
           <div class="college-overview">
             <div class="mini-label">FOUNDER · ${c.founder}</div>
