@@ -1,0 +1,112 @@
+/* Astria landing sequence — MAIN / page 01 first, copy before interface */
+
+/* The legacy chronicle remains available to app-v2 during bootstrap, but must never paint. */
+.intro-stage{display:none!important}
+body.intro-pending{background:var(--site);overflow-x:hidden;overflow-y:auto}
+body.intro-pending .site-shell,
+.site-shell{display:block!important;opacity:1!important;visibility:visible!important}
+
+/* Disable the former post-chronicle reveal so it cannot compete with the new sequence. */
+.site-shell.site-entering .topbar,
+.site-shell.site-entering [data-view-panel="main"].active .hero-copy,
+.site-shell.site-entering [data-view-panel="main"].active .archive-map,
+.site-shell.site-entering [data-view-panel="main"].active .status-console{animation:none!important}
+
+.site-shell.landing-entering .topbar{animation:landingTopbar .68s cubic-bezier(.2,.8,.2,1) both}
+.site-shell.landing-entering [data-view-panel="main"].active .corner-index{animation:landingIndex .9s .08s ease-out both}
+
+/* Left column: reveal the written archive first. */
+.site-shell.landing-entering [data-view-panel="main"].active .hero-copy .eyebrow{
+  animation:landingCopyLine .58s .18s cubic-bezier(.2,.78,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .hero-copy .display-title{
+  animation:landingTitle 1.08s .48s cubic-bezier(.16,.84,.18,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .hero-copy .lead{
+  animation:landingCopyLine .82s 1.28s cubic-bezier(.2,.78,.2,1) both
+}
+
+/* Right column starts only after the left-side copy is fully readable. */
+.site-shell.landing-entering [data-view-panel="main"].active .archive-map{
+  animation:landingInterface .98s 2.18s cubic-bezier(.16,.82,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-map .archive-orbit{
+  animation:landingAstrolabe .95s 2.34s cubic-bezier(.18,.82,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-node{
+  animation:landingNode .52s cubic-bezier(.2,.82,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-node.n1{animation-delay:2.52s}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-node.n2{animation-delay:2.64s}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-node.n3{animation-delay:2.76s}
+.site-shell.landing-entering [data-view-panel="main"].active .archive-node.n4{animation-delay:2.88s}
+.site-shell.landing-entering [data-view-panel="main"].active .status-console{
+  animation:landingConsole .78s 3.08s cubic-bezier(.2,.8,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .status-tile{
+  animation:landingTile .52s cubic-bezier(.2,.8,.2,1) both
+}
+.site-shell.landing-entering [data-view-panel="main"].active .status-tile:nth-child(1){animation-delay:3.22s}
+.site-shell.landing-entering [data-view-panel="main"].active .status-tile:nth-child(2){animation-delay:3.34s}
+.site-shell.landing-entering [data-view-panel="main"].active .status-tile:nth-child(3){animation-delay:3.46s}
+
+@keyframes landingTopbar{
+  from{opacity:0;transform:translateY(-24px)}
+  to{opacity:1;transform:none}
+}
+@keyframes landingIndex{
+  from{opacity:0;transform:translateX(-22px)}
+  to{opacity:1;transform:none}
+}
+@keyframes landingCopyLine{
+  from{opacity:0;filter:blur(8px);transform:translateX(-26px);clip-path:inset(0 100% 0 0)}
+  to{opacity:1;filter:blur(0);transform:none;clip-path:inset(0)}
+}
+@keyframes landingTitle{
+  from{opacity:0;filter:blur(11px);transform:translateX(-42px);clip-path:inset(0 100% 0 0)}
+  58%{opacity:1;filter:blur(2px)}
+  to{opacity:1;filter:blur(0);transform:none;clip-path:inset(0)}
+}
+@keyframes landingInterface{
+  from{opacity:0;filter:blur(13px);transform:translateX(66px) scale(.955)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+@keyframes landingAstrolabe{
+  from{opacity:0;filter:blur(10px);transform:translate(-50%,-50%) scale(.72) rotate(-12deg)}
+  to{opacity:1;filter:blur(0);transform:translate(-50%,-50%) scale(1) rotate(0)}
+}
+@keyframes landingNode{
+  from{opacity:0;filter:blur(5px);transform:translateY(16px) scale(.94)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+@keyframes landingConsole{
+  from{opacity:0;filter:blur(8px);transform:translateY(30px)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+@keyframes landingTile{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:none}
+}
+
+@media(max-width:640px){
+  .site-shell.landing-entering [data-view-panel="main"].active .archive-map{
+    animation-name:landingInterfaceMobile
+  }
+  @keyframes landingInterfaceMobile{
+    from{opacity:0;filter:blur(10px);transform:translateY(32px)}
+    to{opacity:1;filter:blur(0);transform:none}
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .site-shell.landing-entering .topbar,
+  .site-shell.landing-entering [data-view-panel="main"].active .corner-index,
+  .site-shell.landing-entering [data-view-panel="main"].active .hero-copy>*,
+  .site-shell.landing-entering [data-view-panel="main"].active .archive-map,
+  .site-shell.landing-entering [data-view-panel="main"].active .archive-orbit,
+  .site-shell.landing-entering [data-view-panel="main"].active .archive-node,
+  .site-shell.landing-entering [data-view-panel="main"].active .status-console,
+  .site-shell.landing-entering [data-view-panel="main"].active .status-tile{
+    animation:none!important;opacity:1!important;filter:none!important;transform:none!important;clip-path:none!important
+  }
+}
