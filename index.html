@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/college-assets.css">
   <link rel="stylesheet" href="assets/astria-motion.css">
   <link rel="stylesheet" href="assets/landing-entry.css">
+  <link rel="stylesheet" href="assets/team-tree.css">
 </head>
 <body class="intro-pending">
   <section class="intro-stage" id="introStage" aria-label="Astria opening chronicle">
@@ -51,6 +52,7 @@
         <button class="nav-button" data-view="races">RACES</button>
         <button class="nav-button" data-view="world">WORLD</button>
         <button class="nav-button" data-view="rules">RULES</button>
+        <button class="nav-button" data-view="team">TEAM</button>
         <button class="nav-button" data-view="invite">INVITE</button>
       </nav>
       <div class="user-panel"><span>SYSTEM THEME</span><span class="status-dot"></span></div>
@@ -131,6 +133,104 @@
       <section class="view" data-view-panel="rules">
         <div class="section-header"><div><div class="eyebrow">Community Protocol / Conduct</div><h2 class="section-title">RULES</h2></div><div class="section-index">06</div></div>
         <div id="rulesContent"></div>
+      </section>
+
+      <section class="view" data-view-panel="team">
+        <div class="section-header"><div><div class="eyebrow">Project Record / Staff Constellation</div><h2 class="section-title">TEAM</h2></div><div class="section-index">07</div></div>
+        <div class="team-tree-shell">
+          <div class="team-tree-intro">
+            <div class="mini-label">ASTRIA PROJECT · GOLDEN GENEALOGY</div>
+            <h3>THE GOLDEN CONSTELLATION</h3>
+            <p>โครงต้นไม้สำหรับบันทึกเจ้าของโปรเจกต์และทีมงาน โดยเว้นข้อมูลทั้งหมดไว้สำหรับเพิ่มเติมภายหลัง</p>
+          </div>
+          <div class="team-tree-canvas">
+            <svg class="mythic-tree-svg" viewBox="0 0 1200 1100" role="img" aria-label="ต้นไม้สีทองแสดงโครงสร้างทีมงาน">
+              <defs>
+                <linearGradient id="teamTreeGold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#fff1b5"/>
+                  <stop offset=".38" stop-color="#e5bd65"/>
+                  <stop offset=".72" stop-color="#b98631"/>
+                  <stop offset="1" stop-color="#ffe39a"/>
+                </linearGradient>
+                <radialGradient id="teamLeafGold" cx="50%" cy="40%" r="68%">
+                  <stop offset="0" stop-color="#fff8d8"/>
+                  <stop offset=".45" stop-color="#f0ca70"/>
+                  <stop offset="1" stop-color="#a87524"/>
+                </radialGradient>
+              </defs>
+
+              <path class="tree-aura" d="M600 1010 C570 880 586 735 600 600 C618 430 585 268 600 104"/>
+              <path class="tree-main" d="M600 1010 C562 900 584 790 600 684 C618 566 576 462 603 348 C628 240 596 160 600 92"/>
+              <path class="tree-main" d="M600 1010 C640 888 617 780 604 680 C586 553 632 462 602 350" opacity=".56"/>
+
+              <path class="tree-root" d="M603 990 C520 997 457 1037 382 1064 M599 995 C682 1001 745 1038 824 1064 M598 972 C538 951 474 952 410 980 M605 973 C675 950 741 954 802 985 M594 1004 C557 1052 542 1071 511 1087 M607 1002 C644 1048 664 1070 693 1088"/>
+
+              <path class="tree-branch" d="M601 288 C500 248 403 205 284 186 M606 288 C705 248 802 206 919 186"/>
+              <path class="tree-branch" d="M603 405 C487 378 395 356 252 365 M602 405 C720 374 813 354 952 365"/>
+              <path class="tree-branch" d="M601 566 C500 580 411 628 296 683 M605 565 C710 580 799 627 905 683"/>
+              <path class="tree-branch" d="M598 218 C520 167 465 119 410 69 M604 218 C680 166 738 119 795 70"/>
+
+              <path class="tree-twig" d="M284 186 C226 157 177 128 136 84 M284 186 C213 184 166 202 110 230 M365 218 C322 158 312 111 305 54 M411 258 C381 215 369 177 365 132 M919 186 C980 156 1027 126 1068 83 M919 186 C989 184 1036 201 1090 229 M836 218 C880 158 891 110 899 54 M790 258 C821 215 832 177 837 132"/>
+              <path class="tree-twig" d="M252 365 C182 331 134 303 85 256 M252 365 C176 370 125 397 66 430 M360 364 C295 319 276 285 260 246 M450 385 C397 343 380 309 368 274 M952 365 C1018 331 1068 302 1117 256 M952 365 C1027 370 1079 397 1134 430 M842 364 C908 319 927 285 944 246 M752 385 C806 343 823 309 835 274"/>
+              <path class="tree-twig" d="M296 683 C222 710 168 755 121 811 M296 683 C220 664 167 652 103 665 M390 632 C326 660 286 696 245 742 M468 591 C421 620 395 650 371 688 M905 683 C979 710 1034 754 1081 811 M905 683 C982 664 1034 652 1097 665 M812 632 C876 660 918 696 957 742 M734 591 C782 620 808 650 831 688"/>
+
+              <g aria-hidden="true">
+                <ellipse class="tree-leaf" cx="136" cy="84" rx="10" ry="20" transform="rotate(-42 136 84)"/>
+                <ellipse class="tree-leaf" cx="110" cy="230" rx="9" ry="18" transform="rotate(68 110 230)"/>
+                <ellipse class="tree-leaf" cx="305" cy="54" rx="9" ry="19" transform="rotate(-8 305 54)"/>
+                <ellipse class="tree-leaf" cx="365" cy="132" rx="8" ry="17" transform="rotate(-18 365 132)"/>
+                <ellipse class="tree-leaf" cx="410" cy="69" rx="10" ry="20" transform="rotate(-34 410 69)"/>
+                <ellipse class="tree-leaf" cx="1068" cy="83" rx="10" ry="20" transform="rotate(42 1068 83)"/>
+                <ellipse class="tree-leaf" cx="1090" cy="229" rx="9" ry="18" transform="rotate(-68 1090 229)"/>
+                <ellipse class="tree-leaf" cx="899" cy="54" rx="9" ry="19" transform="rotate(8 899 54)"/>
+                <ellipse class="tree-leaf" cx="837" cy="132" rx="8" ry="17" transform="rotate(18 837 132)"/>
+                <ellipse class="tree-leaf" cx="795" cy="70" rx="10" ry="20" transform="rotate(34 795 70)"/>
+                <ellipse class="tree-leaf" cx="85" cy="256" rx="10" ry="21" transform="rotate(-48 85 256)"/>
+                <ellipse class="tree-leaf" cx="66" cy="430" rx="10" ry="21" transform="rotate(70 66 430)"/>
+                <ellipse class="tree-leaf" cx="260" cy="246" rx="8" ry="18" transform="rotate(-22 260 246)"/>
+                <ellipse class="tree-leaf" cx="368" cy="274" rx="8" ry="18" transform="rotate(-20 368 274)"/>
+                <ellipse class="tree-leaf" cx="1117" cy="256" rx="10" ry="21" transform="rotate(48 1117 256)"/>
+                <ellipse class="tree-leaf" cx="1134" cy="430" rx="10" ry="21" transform="rotate(-70 1134 430)"/>
+                <ellipse class="tree-leaf" cx="944" cy="246" rx="8" ry="18" transform="rotate(22 944 246)"/>
+                <ellipse class="tree-leaf" cx="835" cy="274" rx="8" ry="18" transform="rotate(20 835 274)"/>
+                <ellipse class="tree-leaf" cx="121" cy="811" rx="11" ry="22" transform="rotate(-42 121 811)"/>
+                <ellipse class="tree-leaf" cx="103" cy="665" rx="10" ry="20" transform="rotate(74 103 665)"/>
+                <ellipse class="tree-leaf" cx="245" cy="742" rx="9" ry="20" transform="rotate(-34 245 742)"/>
+                <ellipse class="tree-leaf" cx="371" cy="688" rx="8" ry="18" transform="rotate(-24 371 688)"/>
+                <ellipse class="tree-leaf" cx="1081" cy="811" rx="11" ry="22" transform="rotate(42 1081 811)"/>
+                <ellipse class="tree-leaf" cx="1097" cy="665" rx="10" ry="20" transform="rotate(-74 1097 665)"/>
+                <ellipse class="tree-leaf" cx="957" cy="742" rx="9" ry="20" transform="rotate(34 957 742)"/>
+                <ellipse class="tree-leaf" cx="831" cy="688" rx="8" ry="18" transform="rotate(24 831 688)"/>
+              </g>
+            </svg>
+
+            <article class="team-node team-owner-slot" aria-label="ช่องข้อมูลเจ้าของโปรเจกต์">
+              <div class="team-node-avatar" aria-hidden="true"></div>
+              <div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+
+            <article class="team-node team-member-1 is-left" aria-label="ช่องข้อมูลสมาชิกทีมคนที่หนึ่ง">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+            <article class="team-node team-member-2 is-right" aria-label="ช่องข้อมูลสมาชิกทีมคนที่สอง">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+            <article class="team-node team-member-3 is-left" aria-label="ช่องข้อมูลสมาชิกทีมคนที่สาม">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+            <article class="team-node team-member-4 is-right" aria-label="ช่องข้อมูลสมาชิกทีมคนที่สี่">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+            <article class="team-node team-member-5 is-left" aria-label="ช่องข้อมูลสมาชิกทีมคนที่ห้า">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+            <article class="team-node team-member-6 is-right" aria-label="ช่องข้อมูลสมาชิกทีมคนที่หก">
+              <div class="team-node-avatar" aria-hidden="true"></div><div class="team-node-copy" aria-hidden="true"><span class="team-node-line name"></span><span class="team-node-line role"></span></div>
+            </article>
+
+            <div class="team-tree-footnote">PROJECT RECORD · PENDING IDENTITIES</div>
+          </div>
+        </div>
       </section>
 
       <section class="view" data-view-panel="invite">
