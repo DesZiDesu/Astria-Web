@@ -1,0 +1,272 @@
+/* Astria team constellation and mobile lineage refinements */
+
+.team-tree-shell{
+  position:relative;
+  width:min(1220px,100%);
+  margin:0 auto;
+}
+
+.team-tree-intro{
+  position:relative;
+  z-index:3;
+  max-width:720px;
+  margin:0 auto 8px;
+  text-align:center;
+}
+
+.team-tree-intro h3{
+  margin:15px 0 10px;
+  font:600 clamp(2rem,4.5vw,4.6rem)/.98 Cinzel,serif;
+  letter-spacing:-.035em;
+}
+
+.team-tree-intro p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.85;
+}
+
+.team-tree-canvas{
+  position:relative;
+  min-height:1120px;
+  overflow:hidden;
+  isolation:isolate;
+  background:transparent;
+}
+
+.mythic-tree-svg{
+  position:absolute;
+  inset:8px 0 0;
+  z-index:0;
+  width:100%;
+  height:1080px;
+  overflow:visible;
+  filter:drop-shadow(0 0 7px rgba(255,226,155,.42)) drop-shadow(0 0 24px rgba(201,166,90,.18));
+}
+
+.mythic-tree-svg .tree-main,
+.mythic-tree-svg .tree-branch,
+.mythic-tree-svg .tree-root,
+.mythic-tree-svg .tree-twig{
+  fill:none;
+  stroke:url(#teamTreeGold);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+
+.mythic-tree-svg .tree-main{stroke-width:9}
+.mythic-tree-svg .tree-branch{stroke-width:5}
+.mythic-tree-svg .tree-root{stroke-width:6}
+.mythic-tree-svg .tree-twig{stroke-width:2.2;opacity:.9}
+
+.mythic-tree-svg .tree-aura{
+  fill:none;
+  stroke:rgba(255,226,155,.17);
+  stroke-width:28;
+  filter:blur(16px);
+}
+
+.mythic-tree-svg .tree-leaf{
+  fill:url(#teamLeafGold);
+  transform-box:fill-box;
+  transform-origin:center;
+  filter:drop-shadow(0 0 5px rgba(255,226,155,.78));
+  animation:teamLeafShimmer 4.4s ease-in-out infinite;
+}
+
+.mythic-tree-svg .tree-leaf:nth-of-type(3n){animation-delay:-1.3s}
+.mythic-tree-svg .tree-leaf:nth-of-type(4n){animation-delay:-2.4s}
+
+.team-node{
+  position:absolute;
+  z-index:3;
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr);
+  align-items:center;
+  gap:14px;
+  width:270px;
+  min-height:104px;
+  padding:15px 17px;
+  color:#f8f1df;
+  border:1px solid rgba(255,226,155,.36);
+  background:linear-gradient(115deg,rgba(15,16,19,.9),rgba(9,10,12,.68));
+  box-shadow:0 18px 42px rgba(0,0,0,.24),0 0 28px rgba(201,166,90,.08),inset 0 0 0 1px rgba(255,255,255,.025);
+  backdrop-filter:blur(11px);
+  animation:teamNodeIn .75s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.team-node::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  pointer-events:none;
+  border:1px solid rgba(255,226,155,.08);
+  clip-path:polygon(0 0,38% 0,38% 1px,0 1px,0 100%,1px 100%,1px 0);
+}
+
+.team-node::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:44px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(255,226,155,.08),rgba(255,226,155,.68));
+  box-shadow:0 0 8px rgba(255,226,155,.36);
+}
+
+.team-node.is-left::after{right:-44px}
+.team-node.is-right::after{left:-44px;transform:scaleX(-1)}
+
+.team-node-avatar{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:72px;
+  aspect-ratio:1;
+  overflow:hidden;
+  border-radius:50%;
+  border:1px dashed rgba(255,226,155,.58);
+  background:radial-gradient(circle,rgba(255,226,155,.12),rgba(255,226,155,.015) 68%);
+  box-shadow:0 0 0 6px rgba(201,166,90,.035),0 0 24px rgba(201,166,90,.12);
+}
+
+.team-node-avatar::before,
+.team-node-avatar::after{
+  content:"";
+  position:absolute;
+  background:rgba(255,226,155,.62);
+}
+
+.team-node-avatar::before{width:22px;height:1px}
+.team-node-avatar::after{width:1px;height:22px}
+
+.team-node-copy{
+  display:grid;
+  gap:9px;
+  min-width:0;
+}
+
+.team-node-line{
+  display:block;
+  height:7px;
+  border-radius:999px;
+  background:linear-gradient(90deg,rgba(255,226,155,.42),rgba(255,226,155,.08));
+}
+
+.team-node-line.name{width:78%;height:9px}
+.team-node-line.role{width:56%;opacity:.65}
+
+.team-owner-slot{
+  left:50%;
+  top:48%;
+  width:340px;
+  min-height:126px;
+  grid-template-columns:88px minmax(0,1fr);
+  transform:translate(-50%,-50%);
+  border-color:rgba(255,226,155,.66);
+  background:linear-gradient(120deg,rgba(20,18,12,.94),rgba(8,9,11,.78));
+  box-shadow:0 24px 60px rgba(0,0,0,.32),0 0 42px rgba(201,166,90,.15),inset 0 0 0 1px rgba(255,226,155,.08);
+  animation-delay:.16s;
+}
+
+.team-owner-slot::after{display:none}
+.team-owner-slot .team-node-avatar{width:88px}
+.team-owner-slot .team-node-line.name{width:84%;height:11px}
+.team-owner-slot .team-node-line.role{width:62%;height:8px}
+
+.team-member-1{left:2.5%;top:17%;animation-delay:.25s}
+.team-member-2{right:2.5%;top:17%;animation-delay:.35s}
+.team-member-3{left:0;top:36%;animation-delay:.45s}
+.team-member-4{right:0;top:36%;animation-delay:.55s}
+.team-member-5{left:6%;top:62%;animation-delay:.65s}
+.team-member-6{right:6%;top:62%;animation-delay:.75s}
+
+.team-tree-footnote{
+  position:absolute;
+  left:50%;
+  bottom:35px;
+  z-index:2;
+  transform:translateX(-50%);
+  color:color-mix(in srgb,var(--text) 35%,transparent);
+  font:500 .52rem/1 Cinzel,serif;
+  letter-spacing:.28em;
+  white-space:nowrap;
+}
+
+@keyframes teamNodeIn{
+  from{opacity:0;filter:blur(8px)}
+  to{opacity:1;filter:none}
+}
+
+@keyframes teamLeafShimmer{
+  0%,100%{opacity:.5;transform:scale(.86) rotate(-3deg)}
+  50%{opacity:1;transform:scale(1.1) rotate(3deg)}
+}
+
+@media(max-width:980px){
+  .team-tree-canvas{min-height:1180px}
+  .mythic-tree-svg{left:-11%;width:122%;height:1120px}
+  .team-node{width:235px;grid-template-columns:60px minmax(0,1fr);min-height:92px;padding:13px}
+  .team-node-avatar{width:60px}
+  .team-owner-slot{width:315px;grid-template-columns:78px minmax(0,1fr)}
+  .team-owner-slot .team-node-avatar{width:78px}
+  .team-member-1,.team-member-3,.team-member-5{left:1%}
+  .team-member-2,.team-member-4,.team-member-6{right:1%}
+}
+
+@media(max-width:640px){
+  /* The diagonal arrow becomes an emoji-like blue square on some mobile browsers. */
+  .race-tab-arrow{display:none!important}
+  .race-selector button{grid-template-columns:40px minmax(0,1fr)!important;padding-right:13px}
+  .race-tab-copy{grid-column:2!important}
+
+  .team-tree-intro{padding-inline:10px}
+  .team-tree-intro p{font-size:.86rem}
+  .team-tree-canvas{min-height:1320px;margin-inline:-4px}
+  .mythic-tree-svg{left:-62%;top:45px;width:224%;height:1200px;opacity:.92}
+
+  .team-node{
+    width:calc(50% - 26px);
+    min-width:0;
+    min-height:84px;
+    grid-template-columns:48px minmax(0,1fr);
+    gap:10px;
+    padding:11px;
+  }
+  .team-node-avatar{width:48px}
+  .team-node-line{height:6px}
+  .team-node-line.name{height:7px}
+  .team-node.is-left::after,.team-node.is-right::after{width:27px}
+  .team-node.is-left::after{right:-27px}
+  .team-node.is-right::after{left:-27px}
+
+  .team-owner-slot{
+    left:50%;
+    top:46%;
+    width:min(310px,calc(100% - 20px));
+    min-height:112px;
+    grid-template-columns:72px minmax(0,1fr);
+  }
+  .team-owner-slot .team-node-avatar{width:72px}
+
+  .team-member-1{left:0;top:11%}
+  .team-member-2{right:0;top:22%}
+  .team-member-3{left:0;top:33%}
+  .team-member-4{right:0;top:60%}
+  .team-member-5{left:0;top:72%}
+  .team-member-6{right:0;top:84%}
+  .team-tree-footnote{bottom:18px;font-size:.43rem;letter-spacing:.2em}
+}
+
+@media(max-width:390px){
+  .team-tree-canvas{min-height:1260px}
+  .team-node{width:calc(50% - 20px);grid-template-columns:42px minmax(0,1fr);padding:9px;gap:8px}
+  .team-node-avatar{width:42px}
+  .team-owner-slot{width:calc(100% - 12px);grid-template-columns:66px minmax(0,1fr)}
+  .team-owner-slot .team-node-avatar{width:66px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .team-node,.mythic-tree-svg .tree-leaf{animation:none!important}
+}
