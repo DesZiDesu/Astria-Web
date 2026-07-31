@@ -48,7 +48,6 @@
         <header class="team-directory-intro">
           <div class="team-directory-kicker">ASTRIA PROJECT · STAFF DIRECTORY</div>
           <h3>PROJECT TEAM</h3>
-          <p>โครงสร้างทีมงานแบบเรียบง่ายและโหลดรวดเร็ว หัวหน้าทีมอยู่ด้านบน สมาชิกแบ่งเป็นสองกลุ่มบนเดสก์ท็อป และเรียงเป็นคอลัมน์เดียวบนมือถือ</p>
         </header>
 
         <section class="team-lead-area" aria-label="หัวหน้าทีม">
@@ -75,8 +74,6 @@
             ${[5,6,7,8].map(memberCard).join('')}
           </section>
         </div>
-
-        <div class="team-directory-footnote">OPTIMIZED STATIC DIRECTORY · NO HEAVY VISUAL EFFECTS</div>
       </div>`;
   }
 
