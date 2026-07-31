@@ -28,6 +28,55 @@
     document.body.classList.remove('intro-pending');
   }
 
+  function buildTeamDirectory(){
+    const shell = document.querySelector('[data-view-panel="team"] .team-tree-shell');
+    if(!shell || shell.dataset.optimized === 'true') return;
+
+    const memberCard = number => `
+      <article class="team-profile">
+        <div class="team-photo-placeholder" aria-label="ช่องสำหรับรูปสมาชิก"></div>
+        <div class="team-profile-copy">
+          <span class="team-profile-kicker">TEAM MEMBER</span>
+          <h4>MEMBER ${String(number).padStart(2,'0')}</h4>
+          <p>ตำแหน่ง / หน้าที่รับผิดชอบ</p>
+        </div>
+      </article>`;
+
+    shell.dataset.optimized = 'true';
+    shell.innerHTML = `
+      <div class="team-directory">
+        <header class="team-directory-intro">
+          <div class="team-directory-kicker">ASTRIA PROJECT · STAFF DIRECTORY</div>
+          <h3>PROJECT TEAM</h3>
+        </header>
+
+        <section class="team-lead-area" aria-label="หัวหน้าทีม">
+          <article class="team-profile team-profile-lead">
+            <div class="team-photo-placeholder" aria-label="ช่องสำหรับรูปหัวหน้าทีม"></div>
+            <div class="team-profile-copy">
+              <span class="team-profile-kicker">PROJECT LEAD</span>
+              <h4>LEAD NAME</h4>
+              <p>ตำแหน่ง / หน้าที่หลักของหัวหน้าทีม</p>
+            </div>
+          </article>
+        </section>
+
+        <div class="team-directory-rule" aria-hidden="true"></div>
+
+        <div class="team-columns">
+          <section class="team-column" aria-labelledby="teamGroupA">
+            <h4 class="team-group-title" id="teamGroupA">TEAM GROUP A</h4>
+            ${[1,2,3,4].map(memberCard).join('')}
+          </section>
+
+          <section class="team-column" aria-labelledby="teamGroupB">
+            <h4 class="team-group-title" id="teamGroupB">TEAM GROUP B</h4>
+            ${[5,6,7,8].map(memberCard).join('')}
+          </section>
+        </div>
+      </div>`;
+  }
+
   function playLandingSequence(){
     if(!site) return;
     site.classList.remove('site-entering', 'landing-entering');
@@ -38,10 +87,12 @@
   }
 
   stopAndRemoveLegacyIntro();
+  buildTeamDirectory();
   forceMainPage();
   playLandingSequence();
 
   window.addEventListener('pageshow', event => {
+    buildTeamDirectory();
     forceMainPage();
     if(event.persisted) playLandingSequence();
   });
